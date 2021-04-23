@@ -14,7 +14,6 @@ import validation
 import database
 from getpass import getpass
 
-
 def init():
     print("Welcome to bankPHP")
 
@@ -33,7 +32,7 @@ def init():
         init()
 
 
-def login():
+def login(user_account_number=None):
     print("********* Login ***********")
 
     account_number_from_user = input("What is your account number? \n")
@@ -55,7 +54,7 @@ def login():
     else:
         print("Account Number Invalid: check that you have up to 10 digits and only integers")
         init()
-
+        database.create(user_account_number, [first_name, last_name, email, password])
 
 def register():
     print("****** Register *******")
@@ -78,6 +77,8 @@ def register():
         print(" == ==== ====== ===== ===")
 
         login()
+        database.create(user_account_number, [first_name, last_name, email, password])
+
 
     else:
         print("Something went wrong, please try again")
@@ -108,20 +109,29 @@ def bank_operation(user):
 
 
 def withdrawal_operation():
-    print("withdrawal")
-    # get current balance
-    # get amount to withdraw
-    # check if current balance > withdraw balance
-    # deduct withdrawn amount form current balance
-    # display current balance
+    initial_balance = 500;
+    withdrawal_amount= float(input("Please Enter amount to be withdraw: "))
+    print("You Entered:", withdrawal_amount)
+
+    if withdrawal_amount >  initial_balance :
+        print("Insufficient balance:Please enter an another amount")
+        withdrawal_operation()
+    elif:
+        initial_balance <= withdrawal_amount
+        balance = withdrawal_amount - initial_balance
+
+
+    print("Your Current balance is :", balance)
+
 
 
 def deposit_operation():
-    print("Deposit Operations")
-    # get current balance
-    # get amount to deposit
-    # add deposited amount to current balance
-    # display current balance
+       initial_balance =0;
+
+       deposit_amount= float(input("Enter amount to be deposited: "))
+       print("You Deposited:", deposit_amount)
+       balance = deposit_amount + initial_balance
+        print("Your Current balnace is  Amount Deposited:", balance )
 
 
 def generation_account_number():
@@ -137,7 +147,8 @@ def get_current_balance(user_details):
 
 
 def logout():
-    login()
+    read(user_account_number)
+    database.delete(user_account_number)
 
 
 init()
